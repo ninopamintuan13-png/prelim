@@ -1,1 +1,3 @@
 Product: gundam | Price: P200.00 | Category: Premium | Stock: 25 | Status: OK
+Product: gundam | Price: P200.00 | Category: Premium | Stock: 22 | Status: OK
+Product: acrylic box | Price: P300.00 | Category: Premium | Stock: 50 | Status: OK
