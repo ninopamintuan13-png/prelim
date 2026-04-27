@@ -1,0 +1,1 @@
+Product: gundam | Price: P200.00 | Category: Premium | Stock: 25 | Status: OK

@@ -1,61 +1,65 @@
 # ============================================
-# Student Grade Management System
-# Name: Niño Pamintuan | Year: 2nd Year IT
+# Store Product Inventory System
+# Name: Niño Pamintuan | 2nd Year IT
 # ============================================
 
-def get_letter_grade(grade):
-    if grade >= 90:
-        return "A"
-    elif grade >= 80:
-        return "B"
-    elif grade >= 75:
-        return "C"
-    elif grade >= 50:
-        return "D"
+def get_price_category(price):
+    # Determine if Budget, Mid-range, or Premium
+    if price < 50:
+        return "Budget"
+    elif price < 200:
+        return "Mid-range"
     else:
-        return "F"
+        return "Premium"
 
 
-def check_pass_or_fail(grade):
-    if grade >= 75:
-        return "PASSED"
+def check_stock_level(stock):
+    # Determine if stock is sufficient
+    if stock >= 10:
+        return "OK"
     else:
-        return "FAILED"
+        return "LOW STOCK - Reorder needed"
 
 
-def save_student_record(first_name, last_name, grade, letter_grade, status):
-    with open("grade.txt", "a") as file:
-        file.write(f"{first_name} {last_name} | {grade} | {letter_grade} | {status}\n")
+def save_product(name, price, category, stock, stock_status):
+    # Save data to file
+    with open("inventory.txt", "a") as file:
+        file.write(f"Product: {name} | Price: P{price:.2f} | Category: {category} | Stock: {stock} | Status: {stock_status}\n")
 
 
 def main():  # Niño Pamintuan | 2nd Year IT
     while True:
-        print("\n--- Enter Student Info ---")
-        
-        first_name = input("First Name: ")
-        last_name = input("Last Name: ")
-        
+        print("\n--- Enter Product Info ---")
+
+        name = input("Product Name: ")
+
         try:
-            grade = float(input("Grade (0-100): "))
+            price = float(input("Price (in pesos): "))
+            stock = int(input("Stock quantity: "))
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Invalid input. Please enter correct numbers.")
             continue
 
-        letter_grade = get_letter_grade(grade)
-        status = check_pass_or_fail(grade)
+        # PROCESSING
+        category = get_price_category(price)
+        stock_status = check_stock_level(stock)
 
-        print("\n--- Result ---")
-        print(f"Name: {first_name} {last_name}")
-        print(f"Grade: {grade}")
-        print(f"Letter Grade: {letter_grade}")
-        print(f"Status: {status}")
+        # OUTPUT
+        print("\n--- Product Details ---")
+        print(f"Product: {name}")
+        print(f"Price: P{price:.2f}")
+        print(f"Category: {category}")
+        print(f"Stock: {stock}")
+        print(f"Stock Status: {stock_status}")
 
-        save_student_record(first_name, last_name, grade, letter_grade, status)
-        print("Saved to file successfully!")
+        # SAVE
+        save_product(name, price, category, stock, stock_status)
+        print("Saved to inventory.txt successfully!")
 
-        choice = input("\nAdd another student? (yes/no): ").lower()
+        # LOOP
+        choice = input("\nAdd another product? (yes/no): ").lower()
         if choice != "yes":
-            print("Program ended.")
+            print("Inventory program ended.")
             break
 
 
